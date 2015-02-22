@@ -3,17 +3,17 @@ package com.example.tests;
 import org.testng.annotations.*;
 
 /**
- * Testing Contacts functionality
+ * Testing Contacts Creation functionality
  * 
  * @author tzabrodskaya
- * @version 0.1
+ * @version 0.2
  */
 public class ContactCreationTests extends TestBase{
   
   @Test
   public void testNonEmptyContactCreation() throws Exception {
-	openMainPage();
-    initContactCreation();
+	app.getNavigationHelper().openMainPage();
+    app.getContactHelper().initContactCreation();
     ContactData contact = new ContactData();
     contact.firstName = "First name";
     contact.lastName = "Last name";
@@ -29,19 +29,32 @@ public class ContactCreationTests extends TestBase{
     contact.groupMember = "group 1";
     contact.secondaryAddress = "Secondary address";
     contact.secondaryPhone = "5467789898";
-	fillContactForm(contact);
-    submitContactCreation();
-    returnToHomePage();
+	app.getContactHelper().fillContactForm(contact,true);
+    app.getContactHelper().submitContactCreation();
+    app.getContactHelper().returnToHomePage();
   }
 
   
   @Test
   public void testEmptyContactCreation() throws Exception {
-		openMainPage();
-	    initContactCreation();
-	    fillContactForm(new ContactData());
-	    submitContactCreation();
-	    returnToHomePage();
+		app.getNavigationHelper().openMainPage();
+	    app.getContactHelper().initContactCreation();
+	    ContactData contact = new ContactData();
+	    contact.firstName = "";
+	    contact.lastName = "";
+	    contact.mainAddress = "";
+	    contact.homeTel = "";
+	    contact.mobileTel = "";
+	    contact.workTel = "";
+	    contact.mainEmail = "";
+	    contact.secondaryEmail = "";
+	    contact.byear = "";
+	    contact.groupMember = "";
+	    contact.secondaryAddress = "";
+	    contact.secondaryPhone = "";
+	    app.getContactHelper().fillContactForm(contact,false);
+	    app.getContactHelper().submitContactCreation();
+	    app.getContactHelper().returnToHomePage();
 	  }
 
 }

@@ -7,20 +7,20 @@ package com.example.tests;
  * @version 0.1
  */
 public class ContactData {
-	public String firstName = "";
-	public String lastName = "";
-	public String mainAddress = "";
-	public String homeTel = "";
-	public String mobileTel = "";
-	public String workTel = "";
-	public String mainEmail = "";
-	public String secondaryEmail = "";
+	public String firstName;
+	public String lastName;
+	public String mainAddress;
+	public String homeTel;
+	public String mobileTel;
+	public String workTel;
+	public String mainEmail;
+	public String secondaryEmail;
 	public String bday = "-";
 	public String bmonth = "-";
-	public String byear = "";
-	public String groupMember = "";
-	public String secondaryAddress = "";
-	public String secondaryPhone = "";
+	public String byear;
+	public String groupMember;
+	public String secondaryAddress;
+	public String secondaryPhone;
 
 	public ContactData(String firstName, String lastName, String mainAddress,
 			String homeTel, String mobileTel, String workTel, String mainEmail,
