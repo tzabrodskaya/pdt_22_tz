@@ -5,7 +5,6 @@ import org.testng.annotations.*;
 /**
  * Testing Contacts Creation functionality
  * 
- * @author tzabrodskaya
  * @version 0.2
  */
 public class ContactCreationTests extends TestBase{

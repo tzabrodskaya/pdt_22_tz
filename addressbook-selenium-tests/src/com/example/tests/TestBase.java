@@ -7,7 +7,7 @@ import com.example.fw.ApplicationManager;
 
 /**
  * Basic methods for initialization and stop the application manager for the specified browser
- * @author tzabrodskaya
+ *
  * @version 0.2
  *
  */

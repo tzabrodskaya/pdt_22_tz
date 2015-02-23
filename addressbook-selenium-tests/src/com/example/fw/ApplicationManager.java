@@ -3,7 +3,6 @@ package com.example.fw;
 import org.openqa.selenium.WebDriver;
 /**
  * Manager class for manipulation with test application
- * @author tzabrodskaya
  * @version 0.1
  *
  */

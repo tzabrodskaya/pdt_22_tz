@@ -2,8 +2,7 @@ package com.example.tests;
 
 /**
  *  Data for filling Group form
- * 
- * @author tzabrodskaya
+ *
  * @version 0.1
  */
 public class GroupData {

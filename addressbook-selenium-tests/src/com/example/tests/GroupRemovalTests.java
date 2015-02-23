@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 /**
  * Testing Group Deletion functionality
  * 
- * @author tzabrodskaya
  * @version 0.1
  */
 public class GroupRemovalTests extends TestBase{

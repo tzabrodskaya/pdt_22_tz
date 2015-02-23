@@ -5,13 +5,12 @@ import org.testng.annotations.Test;
 /**
  * Testing Contact Deletion functionality
  * 
- * @author tzabrodskaya
  * @version 0.1
  */
 public class ContactRemovalTests extends TestBase{
 	
 	@Test
-	public void removeSomeGroup() {
+	public void removeSomeContact() {
 		app.getNavigationHelper().openMainPage();
 		app.getContactHelper().initContactModification(1);
 		app.getContactHelper().deleteContact();

@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.Select;
  * Base Helper 
  *  - to link the ApplicationManager to helpers
  *  - to manipulate the base elements in forms
- * @author tzabrodskaya
  * @version 0.1
  *
  */
@@ -19,6 +18,7 @@ public abstract class HelperBase {
 	protected ApplicationManager manager;
 	private boolean acceptNextAlert = true;
 	protected WebDriver driver;
+	
 	
 	public HelperBase(ApplicationManager manager) {
 		this.manager = manager;

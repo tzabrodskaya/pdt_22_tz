@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 
 /**
  * Helper to navigate through the pages
- * @author tzabrodskaya
  * @version 0.1
  *
  */

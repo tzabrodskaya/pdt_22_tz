@@ -4,8 +4,7 @@ import org.testng.annotations.Test;
 
 /**
  * Testing Groups Modification functionality
- * 
- * @author tzabrodskaya
+ *
  * @version 0.1
  */
 public class GroupModificationTests extends TestBase{

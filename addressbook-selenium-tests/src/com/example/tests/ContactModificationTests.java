@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 /**
  * Testing Contacts Modification functionality
  * 
- * @author tzabrodskaya
  * @version 0.1
  */
 public class ContactModificationTests extends TestBase{

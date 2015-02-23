@@ -6,7 +6,6 @@ import com.example.tests.GroupData;
 
 /**
  * Helper to manipulate the groups
- * @author tzabrodskaya
  * @version 0.1
  *
  */

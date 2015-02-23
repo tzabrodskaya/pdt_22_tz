@@ -5,7 +5,6 @@ import org.testng.annotations.*;
 /**
  * Testing Groups Creation functionality
  * 
- * @author tzabrodskaya
  * @version 0.2
  */
 public class GroupCreationTests extends TestBase{

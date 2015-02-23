@@ -9,11 +9,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  * Initialization and closing the browser of defined type for ApplicationManager
- * @author tzabrodskaya
- * @version 0.1
+ * @version 0.2
  *
  */
 public class DriverHelper extends HelperBase{
+	
+	private enum Browser {
+		FF, CHROME, IE
+	}
 	
 	public DriverHelper(ApplicationManager manager) {
 		super(manager);
@@ -24,14 +27,14 @@ public class DriverHelper extends HelperBase{
 	public DriverHelper(ApplicationManager manager, String browser) {
 		super(manager);
 		
-		switch(browser) {
-		case ("FF"):
+		switch (Browser.valueOf(browser)) {
+		case FF:
 			manager.appDriver = new FirefoxDriver();
 			break;
-		case("Chrome"):
+		case CHROME:
 			manager.appDriver = new ChromeDriver();
 			break;
-		case("IE"):
+		case IE:
 			//have to ignore security to start (probably only IE8 issue)
 			DesiredCapabilities caps = DesiredCapabilities.internetExplorer();
 			caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);

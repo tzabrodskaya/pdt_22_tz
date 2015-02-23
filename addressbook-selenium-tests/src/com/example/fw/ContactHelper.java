@@ -6,7 +6,6 @@ import com.example.tests.ContactData;
 
 /**
  * Helper to manipulate the contacts
- * @author tzabrodskaya
  * @version 0.1
  *
  */
@@ -52,8 +51,7 @@ public class ContactHelper extends HelperBase{
 	public void initContactModification(int index) {
 		//the contacts on page starts with index 2, e.g. the first contact is on row 2
 		++index;
-		click(By.xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[" + index + "]/td[7]/a/img"));
-		
+		click(By.xpath(".//*[@id='maintable']//tr[" + index + "]/td[7]//img"));
 	}
 	
 	public void submitContactModification() {
