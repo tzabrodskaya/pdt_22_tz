@@ -25,7 +25,8 @@ public class ContactCreationTests extends TestBase{
     contact.bday = "1";
     contact.bmonth = "January";
     contact.byear = "1966";
-    contact.groupMember = "group 1";
+    //TODO - list of current groups
+    contact.groupMember = "";
     contact.secondaryAddress = "Secondary address";
     contact.secondaryPhone = "5467789898";
 	app.getContactHelper().fillContactForm(contact,true);

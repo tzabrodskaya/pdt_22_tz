@@ -26,7 +26,8 @@ public class ContactModificationTests extends TestBase{
 	public void addToGroupSomeContact() {
 		app.getNavigationHelper().openMainPage();
 		app.getContactHelper().selectContactByIndex(1);
-		app.getContactHelper().addToGroup("group 1");
+		////TODO - list of current groups
+		app.getContactHelper().addToGroup("");
 		app.getNavigationHelper().openMainPage();
 	}
 
