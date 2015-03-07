@@ -1,12 +1,16 @@
 package com.example.fw;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import com.example.tests.ContactData;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Helper to manipulate the contacts
- * @version 0.1
+ * @version 0.2
  *
  */
 public class ContactHelper extends HelperBase{
@@ -49,8 +53,8 @@ public class ContactHelper extends HelperBase{
 
 	//update
 	public void initContactModification(int index) {
-		//the contacts on page starts with index 2, e.g. the first contact is on row 2
-		++index;
+		//contacts start always with 2
+		index += 2;
 		click(By.xpath(".//*[@id='maintable']//tr[" + index + "]/td[7]//img"));
 	}
 	
@@ -75,6 +79,30 @@ public class ContactHelper extends HelperBase{
 		selectByText(By.name("to_group"), group);
 		click(By.name("add"));
 		
+	}
+	
+	//get list of contacts from main page
+	public List<ContactData> getContacts() {
+		List<ContactData> contacts = new ArrayList<ContactData>();
+		
+		//find checkboxes with group names as attribute
+		List<WebElement> checkboxes = findElements(By.name("selected[]"));
+		
+		for (WebElement checkbox: checkboxes) {
+			ContactData contact = new ContactData();
+			
+			//title contains First and Lastnames together with spaces, use relative xpath with id instead
+			String id = checkbox.getAttribute("id");
+			contact.id = Integer.parseInt(id.substring("id".length(), id.length()));
+			contact.lastName = findElement(By.xpath("//input[@id='" + id + "']/../following-sibling::td[1]")).getText();
+			contact.firstName = findElement(By.xpath("//input[@id='" + id + "']/../following-sibling::td[2]")).getText();
+			//get phone as a 4th element (can by any if others are empty! 
+			//contact.homeTel = findElement(By.xpath("//input[@id='" + id + "']/../following-sibling::td[4]")).getText();;
+							
+			contacts.add(contact);
+		}
+				
+		return contacts;
 	}
 
 }

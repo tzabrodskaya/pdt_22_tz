@@ -34,7 +34,7 @@ public class GroupCreationTests extends TestBase{
     // compare states
     //assertEquals(newList.size(), oldList.size() + 1);
     
-    oldList.add(group);
+    oldList.add(group);    
     Collections.sort(oldList);
     assertEquals(oldList, newList);
   }

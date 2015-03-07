@@ -1,60 +1,43 @@
 package com.example.tests;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.testng.annotations.*;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * Testing Contacts Creation functionality
  * 
- * @version 0.2
+ * @version 0.3
  */
 public class ContactCreationTests extends TestBase{
   
-  @Test
-  public void testNonEmptyContactCreation() throws Exception {
+  @Test(dataProvider = "randomValidContactGenerator")
+  public void testNonEmptyContactCreation(ContactData contact) throws Exception {
 	app.getNavigationHelper().openMainPage();
-    app.getContactHelper().initContactCreation();
-    ContactData contact = new ContactData();
-    contact.firstName = "First name";
-    contact.lastName = "Last name";
-    contact.mainAddress = "Address 1";
-    contact.homeTel = "789654321";
-    contact.mobileTel = "123456789";
-    contact.workTel = "2223334455";
-    contact.mainEmail = "e-mail@gmail.com";
-    contact.secondaryEmail = "e-mail2@gmail.com";
-    contact.bday = "1";
-    contact.bmonth = "January";
-    contact.byear = "1966";
-    //TODO - list of current groups
-    contact.groupMember = "";
-    contact.secondaryAddress = "Secondary address";
-    contact.secondaryPhone = "5467789898";
+	
+	//save old state - list of contacts
+	List<ContactData> oldList = app.getContactHelper().getContacts();
+	
+    app.getContactHelper().initContactCreation();    
 	app.getContactHelper().fillContactForm(contact,true);
     app.getContactHelper().submitContactCreation();
     app.getContactHelper().returnToHomePage();
+    
+    //save new state - list of contacts
+    List<ContactData> newList = app.getContactHelper().getContacts();
+    
+    // compare states
+    assertEquals(oldList.size()+1, newList.size());
+    
+    //contacts are sorted by their ids
+    Collections.sort(oldList);
+    oldList.add(contact);
+    Collections.sort(newList);
+    assertEquals(oldList, newList);
+    
   }
-
-  
-  @Test
-  public void testEmptyContactCreation() throws Exception {
-		app.getNavigationHelper().openMainPage();
-	    app.getContactHelper().initContactCreation();
-	    ContactData contact = new ContactData();
-	    contact.firstName = "";
-	    contact.lastName = "";
-	    contact.mainAddress = "";
-	    contact.homeTel = "";
-	    contact.mobileTel = "";
-	    contact.workTel = "";
-	    contact.mainEmail = "";
-	    contact.secondaryEmail = "";
-	    contact.byear = "";
-	    contact.groupMember = "";
-	    contact.secondaryAddress = "";
-	    contact.secondaryPhone = "";
-	    app.getContactHelper().fillContactForm(contact,false);
-	    app.getContactHelper().submitContactCreation();
-	    app.getContactHelper().returnToHomePage();
-	  }
 
 }
