@@ -18,12 +18,6 @@ public class DriverHelper extends HelperBase{
 		FF, CHROME, IE
 	}
 	
-	public DriverHelper(ApplicationManager manager) {
-		super(manager);
-		manager.appDriver = new FirefoxDriver();
-		manager.appDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	}
-	
 	public DriverHelper(ApplicationManager manager, String browser) {
 		super(manager);
 		
@@ -46,6 +40,7 @@ public class DriverHelper extends HelperBase{
 		}
 		
 		manager.appDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		manager.appDriver.get(manager.baseUrl + "/addressbookv4.1.4/");
 	}
 	
 	

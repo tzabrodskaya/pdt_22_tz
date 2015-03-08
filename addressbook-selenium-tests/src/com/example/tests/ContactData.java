@@ -1,26 +1,26 @@
 package com.example.tests;
 
 /**
- *  Data for filling Contact form
+ *  Data for filling Contact form with overridden basic methods
  * 
- * @version 0.2
+ * @version 0.3
  */
 public class ContactData implements Comparable<ContactData>{
-	public String firstName;
-	public String lastName;
-	public String mainAddress;
-	public String homeTel;
-	public String mobileTel;
-	public String workTel;
-	public String mainEmail;
-	public String secondaryEmail;
-	public String bday = "-";
-	public String bmonth = "-";
-	public String byear;
-	public String groupMember;
-	public String secondaryAddress;
-	public String secondaryPhone;
-	public Integer id;
+	private String firstName;
+	private String lastName;
+	private String mainAddress;
+	private String homeTel;
+	private String mobileTel;
+	private String workTel;
+	private String mainEmail;
+	private String secondaryEmail;
+	private String bday = "-";
+	private String bmonth = "-";
+	private String byear;
+	private String groupMember;
+	private String secondaryAddress;
+	private String secondaryPhone;
+	private Integer id;
 
 	public ContactData(String firstName, String lastName, String mainAddress,
 			String homeTel, String mobileTel, String workTel, String mainEmail,
@@ -45,6 +45,142 @@ public class ContactData implements Comparable<ContactData>{
 	public ContactData() {
 	}
 	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getMainAddress() {
+		return mainAddress;
+	}
+
+	public String getHomeTel() {
+		return homeTel;
+	}
+
+	public String getMobileTel() {
+		return mobileTel;
+	}
+
+	public String getWorkTel() {
+		return workTel;
+	}
+
+	public String getMainEmail() {
+		return mainEmail;
+	}
+
+	public String getSecondaryEmail() {
+		return secondaryEmail;
+	}
+
+	public String getBday() {
+		return bday;
+	}
+
+	public String getBmonth() {
+		return bmonth;
+	}
+
+	public String getByear() {
+		return byear;
+	}
+
+	public String getGroupMember() {
+		return groupMember;
+	}
+
+	public String getSecondaryAddress() {
+		return secondaryAddress;
+	}
+
+	public String getSecondaryPhone() {
+		return secondaryPhone;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+		//setting local variables
+		public ContactData withFirstName(String firstName) {
+			this.firstName = firstName;
+			return this;
+		}
+
+		public ContactData withLastName(String lastName) {
+			this.lastName = lastName;
+			return this;
+		}
+
+		public ContactData withMainAddress(String Address) {
+			mainAddress = Address;
+			return this;
+		}
+
+		public ContactData withHomeTel(String homeTel) {
+			this.homeTel = homeTel;
+			return this;
+		}
+
+		public ContactData withMobilTel(String mobilTel) {
+			mobileTel = mobilTel;
+			return this;
+		}
+
+		public ContactData withWorkTel(String workTel) {
+			this.workTel = workTel;
+			return this;
+		}
+
+		public ContactData withMainEmail(String mainEmail) {
+			this.mainEmail = mainEmail;
+			return this;
+		}
+
+		public ContactData withSecondaryEmail(String secondaryEmail) {
+			this.secondaryEmail = secondaryEmail;
+			return this;
+		}
+
+		public ContactData withBday(String bday) {
+			this.bday = bday;
+			return this;
+		}
+
+		public ContactData withBmonth(String bmonth) {
+			this.bmonth = bmonth;
+			return this;
+		}
+
+		public ContactData withByear(String byear) {
+			this.byear = byear;
+			return this;
+		}
+
+		public ContactData withGroupMember(String groupMember) {
+			this.groupMember = groupMember;
+			return this;
+		}
+
+		public ContactData withSecondaryAddress(String secondaryAddress) {
+			this.secondaryAddress = secondaryAddress;
+			return this;
+		}
+
+		public ContactData withSecondaryPhone(String secondaryPhone) {
+			this.secondaryPhone = secondaryPhone;
+			return this;
+		}
+		
+		public ContactData withId(Integer contactId) {
+			id = contactId;
+			return this;
+		}
+
 	//Overridden basic methods, needed for compare, order and display
 	@Override
 	public String toString() {
@@ -99,8 +235,8 @@ public class ContactData implements Comparable<ContactData>{
 
 	@Override
 	public int compareTo(ContactData other) {
-		return this.id.compareTo(other.id);
+		//return this.id.compareTo(other.id);
+		return this.lastName.toLowerCase().compareTo(other.lastName.toLowerCase());
 	}
-
 	
 }

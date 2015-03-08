@@ -3,12 +3,12 @@ package com.example.tests;
 /**
  *  Data for filling Group form with overridden basic methods
  *
- * @version 0.2
+ * @version 0.3
  */
 public class GroupData implements Comparable<GroupData>{
-	public String name;
-	public String header;
-	public String footer;
+	private String name;
+	private String header;
+	private String footer;
 
 	public GroupData(String name, String header, String footer) {
 		this.name = name;
@@ -17,6 +17,34 @@ public class GroupData implements Comparable<GroupData>{
 	}
 	
 	public GroupData() {
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public String getHeader() {
+		return header;
+	}
+
+	public String getFooter() {
+		return footer;
+	}
+
+	//parameters initialization
+	public GroupData withName(String name) {
+		this.name = name;
+		return this;
+	}
+
+	public GroupData withHeader(String header) {
+		this.header = header;
+		return this;
+	}
+
+	public GroupData withFooter(String footer) {
+		this.footer = footer;
+		return this;
 	}
 
 	//Overridden basic methods, needed for compare, order and display

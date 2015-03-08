@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 
 /**
  * Helper to navigate through the pages
- * @version 0.1
+ * @version 0.2
  *
  */
 public class NavigationHelper extends HelperBase{
@@ -13,12 +13,24 @@ public class NavigationHelper extends HelperBase{
 		super(manager);
 	}
 
-	public void openMainPage() {
-	    driver.get(manager.baseUrl + "/addressbookv4.1.4/");
+	public void mainPage() {
+		if(! onMainPage()) {
+	    click(By.linkText("home"));
+		}
 	}
 
-	public void gotoGroupsPage() {
-		click(By.linkText("groups"));
+	private boolean onMainPage() {
+		return (findElements(By.id("maintable")).size() > 0);
+	}
+
+	public void groupsPage() {
+		if(! onGroupPage()) {
+			click(By.linkText("groups"));
+		}		
+	}
+
+	private boolean onGroupPage() {
+		return driver.getCurrentUrl().contains("/group.php") && (findElements(By.name("new")).size() > 0);
 	}
 
 }

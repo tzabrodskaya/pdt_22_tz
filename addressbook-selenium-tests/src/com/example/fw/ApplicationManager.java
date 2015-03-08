@@ -20,7 +20,7 @@ public class ApplicationManager {
 	
 	
 	public ApplicationManager() {
-		driverHelper = new DriverHelper(this);
+		driverHelper = new DriverHelper(this, "FF");
 	}
 	
 	public ApplicationManager(String browser) {
@@ -32,7 +32,7 @@ public class ApplicationManager {
 	}
 
 	
-	public NavigationHelper getNavigationHelper() {
+	public NavigationHelper navigateTo() {
 		if(navigationHelper == null) {
 			navigationHelper = new NavigationHelper(this);
 		}
