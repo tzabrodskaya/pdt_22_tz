@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Helper to manipulate the contacts
- * @version 0.3
+ * @version 0.4
  *
  */
 public class ContactHelper extends HelperBase{
@@ -72,27 +72,65 @@ public class ContactHelper extends HelperBase{
 		cachedContacts = new SortedListOf<ContactData>();
 		
 		manager.navigateTo().mainPage();
-		//find checkboxes with group names as attribute
-		List<WebElement> checkboxes = findElements(By.name("selected[]"));
+		//find rows with contact information
+		List<WebElement> rows = findElements(By.name("entry"));
 		
-		for (WebElement checkbox: checkboxes) {
+		for (WebElement row: rows) {
 			
 			//title contains First and Lastnames together with spaces, use relative xpath with id instead
-			String id = checkbox.getAttribute("id");
-			Integer contactId = Integer.parseInt(id.substring("id".length(), id.length()));
-			String lastName = findElement(By.xpath("//input[@id='" + id + "']/../following-sibling::td[1]")).getText();
-			String firstName = findElement(By.xpath("//input[@id='" + id + "']/../following-sibling::td[2]")).getText();
-			//get phone as a 4th element (can by any if others are empty! 
-			//contact.homeTel = findElement(By.xpath("//input[@id='" + id + "']/../following-sibling::td[4]")).getText();;
+			String id = row.findElement(By.xpath(".//td[1]/input")).getAttribute("id");
+			Integer contactId = Integer.parseInt(id.replace("id",""));
+			String lastName = row.findElement(By.xpath(".//td[2]")).getText();
+		    String firstName = row.findElement(By.xpath(".//td[3]")).getText();
+			String mainEmail = row.findElement(By.xpath(".//td[4]")).getText();
+			String homeTel = row.findElement(By.xpath(".//td[5]")).getText();
+			
 							
-			cachedContacts.add(new ContactData().withFirstName(firstName).withLastName(lastName).withId(contactId));
+			cachedContacts.add(new ContactData()
+				.withFirstName(firstName)
+				.withLastName(lastName)
+				.withId(contactId)
+				.withHomeTel(homeTel)
+				.withMainEmail(mainEmail));
 		}
 			
 	}
 	
+	//get list of contacts from AddressBook page
+	public SortedListOf<ContactData> getAddressBookContacts() {
+		SortedListOf<ContactData> listAddressBook = new SortedListOf<ContactData>();
+		
+		manager.navigateTo().addressBookPage();
+		
+		List<WebElement> rows = findElements(By.xpath(".//*[@valign='top']"));
+		
+		for (WebElement row: rows) {
+			String names = row.findElement(By.xpath("./b")).getText();
+			String firstName = (names == "" || !names.contains("First")) ? "" : getFirstName(names);
+			String lastName = (names == "" || !names.contains("Last")) ? "" : names.substring(names.indexOf("L"), names.length());
+			String mainEmail = row.findElement(By.xpath(".//a[1]")).getText();
+			String rowText = row.getText();
+			String homeTel = rowText.substring(rowText.indexOf("H: ") + 3, rowText.indexOf("\n", rowText.indexOf("H: ")));
+			
+			listAddressBook.add(new ContactData()
+				.withFirstName(firstName)
+				.withLastName(lastName)
+				.withHomeTel(homeTel)
+				.withMainEmail(mainEmail));
+		}
+		
+		
+		System.out.println(driver.getCurrentUrl());
+		return listAddressBook;
+	}
+
 	
 //----------------------------------------------------------------------------------------------------------------------------------
 
+	private String getFirstName(String names) {
+		return !names.contains("Last") ? names : names.substring(0, names.indexOf(" "));
+	}
+	
 	//create
 	public ContactHelper initContactCreation() {
 		manager.navigateTo().mainPage();

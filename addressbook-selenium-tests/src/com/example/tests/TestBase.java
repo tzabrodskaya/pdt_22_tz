@@ -1,8 +1,13 @@
 package com.example.tests;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import org.testng.annotations.AfterTest;
@@ -10,6 +15,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
 import com.example.fw.ApplicationManager;
+import com.example.utils.DateGenerator;
 
 /**
  * Basic methods for initialization and stop the application manager for the specified browser
@@ -37,7 +43,7 @@ public abstract class TestBase {
 
 	public String generateRandomString(String field) {
 		  Random rnd = new Random();
-		  if (rnd.nextInt(3) == 0) {
+		  if (rnd.nextInt(5) == 0) {
 			  return "";
 		  } else {
 			  return field + rnd.nextInt();
@@ -64,29 +70,32 @@ public abstract class TestBase {
 	public Iterator<Object[]> randomValidContactGenerator() {
 		List<Object[]> list = new ArrayList<Object[]>();
 		
-		String months[] = {"January", "February", "March", "April",
-                "May", "June", "July", "August", "September",
-                "October", "November", "December"};
-		Random b = new Random();
+		DateFormat df = new SimpleDateFormat("yyyyMMMM d", Locale.ENGLISH);
+		String formattedDate;
+		String bday;
+		String bmonth;
+		String byear;
 		
 		for (int i = 0; i < 5; i++) {
 			
-			Integer bday = b.nextInt(28) + 1;
-			Integer bmonth = b.nextInt(12) + 1;
-		    Integer byear = b.nextInt(80) + 1910;
-		    
+			Date generatedData = DateGenerator.generateDate(new GregorianCalendar(1940,1,1), new GregorianCalendar(2000,1,1));
+			formattedDate = df.format(generatedData);
+			bday = formattedDate.replaceAll("\\d+\\w+ ","");
+			bmonth = formattedDate.replaceAll("[^a-zA-Z]","");
+			byear = formattedDate.substring(0, 4);
+			
 			ContactData contact = new ContactData()
-			.withFirstName(generateRandomString("First Name"))
-			.withLastName(generateRandomString("Last name"))
+			.withFirstName(generateRandomString("FirstName"))
+			.withLastName(generateRandomString("LastName"))
 			.withMainAddress(generateRandomString("Address"))
-			.withHomeTel(generateRandomString(""))
+			.withHomeTel("66" + generateRandomString(""))
 			.withMobilTel(generateRandomString(""))
 			.withWorkTel(generateRandomString(""))
-			.withMainEmail(generateRandomString("e-mail@gmail.com"))
+			.withMainEmail("main" + generateRandomString("e-mail@gmail.com"))
 			.withSecondaryEmail(generateRandomString("e-mail2@gmail.com"))
-			.withBday(bday.toString())
-			.withBmonth(months[bmonth])
-			.withByear(byear.toString())
+			.withBday(bday)
+			.withBmonth(bmonth)
+			.withByear(byear)
 			.withGroupMember("")
 			.withSecondaryAddress(generateRandomString("Secondary address"))
 			.withSecondaryPhone(generateRandomString("5467789898"));

@@ -32,5 +32,15 @@ public class NavigationHelper extends HelperBase{
 	private boolean onGroupPage() {
 		return driver.getCurrentUrl().contains("/group.php") && (findElements(By.name("new")).size() > 0);
 	}
+	
+	public void addressBookPage() {
+		if (! onAddressBookPage()) {
+			click(By.linkText("print all"));
+		}
+	}
+
+	private boolean onAddressBookPage() {
+		return (findElements(By.name("Address book")).size() > 0) && driver.getCurrentUrl().contains("print&phones");
+	}
 
 }

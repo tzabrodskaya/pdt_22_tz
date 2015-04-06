@@ -205,8 +205,6 @@ public class ContactData implements Comparable<ContactData>{
 				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result
 				+ ((mainEmail == null) ? 0 : mainEmail.hashCode());
-		result = prime * result
-				+ ((secondaryEmail == null) ? 0 : secondaryEmail.hashCode());
 		*/
 		return result;
 	}
@@ -225,10 +223,20 @@ public class ContactData implements Comparable<ContactData>{
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
+		if (homeTel == null) {
+			if (other.homeTel != null)
+				return false;
+		} else if (!homeTel.equals(other.homeTel))
+			return false;
 		if (lastName == null) {
 			if (other.lastName != null)
 				return false;
 		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (mainEmail == null) {
+			if (other.mainEmail != null)
+				return false;
+		} else if (!mainEmail.equals(other.mainEmail))
 			return false;
 		return true;
 	}
