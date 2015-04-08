@@ -1,9 +1,11 @@
 package com.example.tests;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  *  Data for filling Group form with overridden basic methods
  *
- * @version 0.3
+ * @version 0.4
  */
 public class GroupData implements Comparable<GroupData>{
 	private String name;
@@ -53,7 +55,11 @@ public class GroupData implements Comparable<GroupData>{
 		return "GroupData [name=" + name + ", header=" + header + ", footer="
 				+ footer + "]";
 	}
-
+	
+	public String toString(String delimeter){
+		return StringUtils.join(new String[] {name, header, footer, "!\n"}, delimeter);
+	}
+	
 	@Override
 	public int hashCode() {
 		//final int prime = 31;

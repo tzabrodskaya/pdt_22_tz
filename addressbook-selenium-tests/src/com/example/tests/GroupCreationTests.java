@@ -1,8 +1,12 @@
 package com.example.tests;
 
+import static com.example.tests.GroupDataGenerator.loadGroupsFromCsvFile;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
 
 import org.testng.annotations.*;
 
@@ -11,11 +15,18 @@ import com.example.utils.SortedListOf;
 /**
  * Testing Groups Creation functionality with assertion
  * 
- * @version 0.4
+ * @version 0.5
  */
 public class GroupCreationTests extends TestBase{
 
-  @Test(dataProvider = "randomValidGroupGenerator")
+ // data provider for groups from generated file
+ @DataProvider 
+ public Iterator<Object[]> groupsFromFile() throws IOException {
+		return wrapGroupsForDataProvider(loadGroupsFromCsvFile(new File("groups.txt"))).iterator();
+ }
+
+//@Test(dataProvider = "randomValidGroupGenerator")
+  @Test(dataProvider = "groupsFromFile")
   public void testGroupCreationWithValidData(GroupData group) throws Exception {
     //save old state - list of groups
 	 SortedListOf<GroupData> oldList = app.getGroupHelper().getGroups();

@@ -1,9 +1,11 @@
 package com.example.tests;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  *  Data for filling Contact form with overridden basic methods
  * 
- * @version 0.3
+ * @version 0.4
  */
 public class ContactData implements Comparable<ContactData>{
 	private String firstName;
@@ -192,6 +194,12 @@ public class ContactData implements Comparable<ContactData>{
 				+ ", byear=" + byear + ", groupMember=" + groupMember
 				+ ", secondaryAddress=" + secondaryAddress
 				+ ", secondaryPhone=" + secondaryPhone + "]";
+	}
+	
+
+	public String toString(String delimeter) {
+		return StringUtils.join(new String[] {firstName, lastName, mainAddress, homeTel, mobileTel, workTel, mainEmail, 
+				secondaryEmail, bday, bmonth, byear, groupMember, secondaryAddress, secondaryPhone, "!\n"}, delimeter);
 	}
 	
 	@Override
