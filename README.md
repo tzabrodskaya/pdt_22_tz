@@ -28,4 +28,4 @@ new PDT project 2015:
    DataGenerators for Groups and Contacts with saving test-data to files (csv or xml) are implemented (HW11).
    New DataProviders read data from files (HW12).
    Suit configuration file for TestNG is created with script to run tests from command-line (HW13).
-   Make a properties file - N/A (HW14).
+   Make a properties file(HW14).

@@ -11,7 +11,7 @@
       <class name="com.example.tests.GroupModificationTests"/> -->
       <class name="com.example.tests.GroupRemovalTests"/>
       
-      <class name="com.example.tests.AddressBookTests"/>
+      <!--  <class name="com.example.tests.AddressBookTests"/> -->
 	  
     </classes>
   </test> <!-- AddressBook test -->

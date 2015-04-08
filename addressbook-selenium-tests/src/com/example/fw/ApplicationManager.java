@@ -1,5 +1,7 @@
 package com.example.fw;
 
+import java.util.Properties;
+
 import org.openqa.selenium.WebDriver;
 /**
  * Manager class for manipulation with test application
@@ -27,6 +29,11 @@ public class ApplicationManager {
 		driverHelper = new DriverHelper(this, browser);
 	}
     
+	public ApplicationManager(Properties properties) {
+		baseUrl = properties.getProperty("baseUrl","http://localhost/");
+		driverHelper = new DriverHelper(this, properties.getProperty("browser", "FF"));
+	}
+	
 	public void stop() {
 		driverHelper.quit();
 	}
