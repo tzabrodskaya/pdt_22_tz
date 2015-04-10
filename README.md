@@ -29,3 +29,9 @@ new PDT project 2015:
    New DataProviders read data from files (HW12).
    Suit configuration file for TestNG is created with script to run tests from command-line (HW13).
    Make a properties file(HW14).
+
+ - Lecture 6: Java GUI Test Automation.
+   New project with same infostructure as in previous lessons: Test classes,TestData classes, ApplicationManager, Helpers,       properties files, TestNG suit file configuration (HW15).
+   Tests for checking folder creation functionality (HW15).
+   Tests for verifying folder creation with only unique name (HW16).
+   Folder removal test-case (HW17).
