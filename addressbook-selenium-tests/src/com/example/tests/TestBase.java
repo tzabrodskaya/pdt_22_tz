@@ -13,6 +13,8 @@ import java.util.Properties;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import com.example.fw.ApplicationManager;
 
@@ -20,7 +22,7 @@ import com.example.fw.ApplicationManager;
  * Basic methods for initialization and stop the application manager for the specified browser
  * DataProvider are defined for groups and contacts
  * 
- * @version 0.6
+ * @version 0.7
  *
  */
 public abstract class TestBase {
@@ -29,11 +31,16 @@ public abstract class TestBase {
 
 
 	@BeforeTest
-	public void setUp() throws Exception {
-		String configFile = System.getProperty("configFile", "applicationFF.properties");
+	@Parameters({"configFile"})
+	public void setUp(@Optional String configFile) throws Exception {
+		if (configFile == null) {
+			configFile = System.getProperty("configFile", "applicationFF.properties");
+		}
+	
 		Properties properties = new Properties();
 		properties.load(new FileReader(new File(configFile)));
-		app = new ApplicationManager(properties);
+		app = ApplicationManager.getInstance();
+		app.setProperties(properties);
 	  }
 	
 	@AfterTest

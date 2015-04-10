@@ -5,12 +5,12 @@ import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 /**
  * Manager class for manipulation with test application
- * @version 0.1
+ * @version 0.2
  *
  */
 public class ApplicationManager {
 	
-
+	private static ApplicationManager singleton;
 	private NavigationHelper navigationHelper;
 	private GroupHelper groupHelper;
 	private ContactHelper contactHelper;
@@ -19,20 +19,33 @@ public class ApplicationManager {
 	public WebDriver appDriver;
 	public String baseUrl = "http://localhost/";
 	
-	
+	private Properties props;
 	
 	public ApplicationManager() {
-		driverHelper = new DriverHelper(this, "FF");
-	}
-	
-	public ApplicationManager(String browser) {
-		driverHelper = new DriverHelper(this, browser);
 	}
     
-	public ApplicationManager(Properties properties) {
-		baseUrl = properties.getProperty("baseUrl","http://localhost/");
-		driverHelper = new DriverHelper(this, properties.getProperty("browser", "FF"));
+	public static ApplicationManager getInstance() {
+		
+		if (singleton == null) {
+			singleton = new ApplicationManager();
+		}
+		return singleton;
 	}
+	
+	public void setProperties(Properties props) {
+		this.props = props;
+		driverHelper = new DriverHelper(this, getProperty("browser"));
+		baseUrl = getProperty("baseUrl");
+	}
+	
+	public String getProperty(String key) {
+		return props.getProperty(key);
+	}
+	
+	public Long getLongProperty(String key) {
+		return Long.parseLong(getProperty(key));
+	}
+	
 	
 	public void stop() {
 		driverHelper.quit();

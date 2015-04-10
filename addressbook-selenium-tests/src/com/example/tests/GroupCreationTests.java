@@ -15,14 +15,14 @@ import com.example.utils.SortedListOf;
 /**
  * Testing Groups Creation functionality with assertion
  * 
- * @version 0.5
+ * @version 0.6
  */
 public class GroupCreationTests extends TestBase{
 
  // data provider for groups from generated file
  @DataProvider 
  public Iterator<Object[]> groupsFromFile() throws IOException {
-		return wrapGroupsForDataProvider(loadGroupsFromCsvFile(new File("groups.txt"))).iterator();
+		return wrapGroupsForDataProvider(loadGroupsFromCsvFile(new File(app.getProperty("groupsDataFile")))).iterator();
  }
 
 //@Test(dataProvider = "randomValidGroupGenerator")

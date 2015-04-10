@@ -8,8 +8,10 @@
       <class name="com.example.tests.ContactRemovalTests"/>
       
       <class name="com.example.tests.GroupCreationTests"/>
-      <class name="com.example.tests.GroupModificationTests"/> -->
-      <class name="com.example.tests.GroupRemovalTests"/>
+      <class name="com.example.tests.GroupModificationTests"/> 
+      <class name="com.example.tests.GroupRemovalTests"/>-->
+      
+      <class name="com.example.tests.GroupCreationTests"/>
       
       <!--  <class name="com.example.tests.AddressBookTests"/> -->
 	  

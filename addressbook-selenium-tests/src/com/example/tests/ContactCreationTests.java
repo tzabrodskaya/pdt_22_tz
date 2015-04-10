@@ -15,13 +15,14 @@ import static org.hamcrest.Matchers.*;
 /**
  * Testing Contacts Creation functionality
  * 
- * @version 0.5
+ * @version 0.6
  */
 public class ContactCreationTests extends TestBase{
   
   @DataProvider
   public Iterator<Object[]> contactsFromFile() throws IOException {
-		return wrapContactsForDataProvider(loadContactsFromXMLFile(new File("contacts.xml"))).iterator();
+		return wrapContactsForDataProvider(loadContactsFromXMLFile(new File(app.getProperty("contactsDataFile")))).iterator();
+		// TODO file name to property file
   }
 	
 

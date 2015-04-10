@@ -9,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  * Initialization and closing the browser of defined type for ApplicationManager
- * @version 0.2
+ * @version 0.3
  *
  */
 public class DriverHelper extends HelperBase{
@@ -39,7 +39,8 @@ public class DriverHelper extends HelperBase{
 			manager.appDriver = new FirefoxDriver();
 		}
 		
-		manager.appDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		manager.appDriver.manage().timeouts().implicitlyWait(manager.getLongProperty("implicitWait"), TimeUnit.SECONDS);
+		// TODO put timeout into properties file
 		manager.appDriver.get(manager.baseUrl + "/addressbookv4.1.4/");
 	}
 	
