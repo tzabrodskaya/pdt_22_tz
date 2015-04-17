@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+ <class name="com.example.tests.ContactData" table="addressbook">
+ <id name="id" column="id" ></id>
+ <property name="firstName" column="firstname" />
+ <property name="lastName" column="lastname" />
+ <property name="mainAddress" column="address" />
+ <property name="homeTel" column="home" />
+ <property name="mobileTel" column="mobile" />
+ <property name="workTel" column="work" />
+ <property name="mainEmail" column="email" />
+ <property name="secondaryEmail" column="email2" />
+ <property name="bday" column="bday" />
+ <property name="bmonth" column="bmonth" />
+ <property name="byear" column="byear" />
+ <property name="secondaryAddress" column="address2" />
+ <property name="secondaryPhone" column="phone2" />
+ </class>
+</hibernate-mapping>

@@ -15,8 +15,9 @@ import static org.hamcrest.Matchers.*;
 /**
  * Testing Contacts Creation functionality
  * 
- * @version 0.6
+ * @version 0.7
  */
+
 public class ContactCreationTests extends TestBase{
   
   @DataProvider
@@ -31,7 +32,7 @@ public class ContactCreationTests extends TestBase{
   public void testNonEmptyContactCreation(ContactData contact) {
 	
 	//save old state - list of contacts
-	SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
+	SortedListOf<ContactData> oldList = app.getHibernateHelper().listContacts();
 	
 	//actions
 	app.getContactHelper().createContact(contact);

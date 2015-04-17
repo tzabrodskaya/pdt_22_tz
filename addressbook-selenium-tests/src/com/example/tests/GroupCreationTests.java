@@ -15,7 +15,7 @@ import com.example.utils.SortedListOf;
 /**
  * Testing Groups Creation functionality with assertion
  * 
- * @version 0.6
+ * @version 0.7
  */
 public class GroupCreationTests extends TestBase{
 
@@ -29,7 +29,7 @@ public class GroupCreationTests extends TestBase{
   @Test(dataProvider = "groupsFromFile")
   public void testGroupCreationWithValidData(GroupData group) throws Exception {
     //save old state - list of groups
-	 SortedListOf<GroupData> oldList = app.getGroupHelper().getGroups();
+	 SortedListOf<GroupData> oldList = app.getHibernateHelper().listGroups();
 	
     //actions
     app.getGroupHelper().createGroup(group);

@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  *  Data for filling Contact form with overridden basic methods
  * 
- * @version 0.4
+ * @version 0.5
  */
 public class ContactData implements Comparable<ContactData>{
 	private String firstName;
@@ -47,6 +47,66 @@ public class ContactData implements Comparable<ContactData>{
 	public ContactData() {
 	}
 	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setMainAddress(String mainAddress) {
+		this.mainAddress = mainAddress;
+	}
+
+	public void setHomeTel(String homeTel) {
+		this.homeTel = homeTel;
+	}
+
+	public void setMobileTel(String mobileTel) {
+		this.mobileTel = mobileTel;
+	}
+
+	public void setWorkTel(String workTel) {
+		this.workTel = workTel;
+	}
+
+	public void setMainEmail(String mainEmail) {
+		this.mainEmail = mainEmail;
+	}
+
+	public void setSecondaryEmail(String secondaryEmail) {
+		this.secondaryEmail = secondaryEmail;
+	}
+
+	public void setBday(String bday) {
+		this.bday = bday;
+	}
+
+	public void setBmonth(String bmonth) {
+		this.bmonth = bmonth;
+	}
+
+	public void setByear(String byear) {
+		this.byear = byear;
+	}
+
+	public void setGroupMember(String groupMember) {
+		this.groupMember = groupMember;
+	}
+
+	public void setSecondaryAddress(String secondaryAddress) {
+		this.secondaryAddress = secondaryAddress;
+	}
+
+	public void setSecondaryPhone(String secondaryPhone) {
+		this.secondaryPhone = secondaryPhone;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}

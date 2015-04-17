@@ -9,10 +9,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  * Initialization and closing the browser of defined type for ApplicationManager
- * @version 0.3
+ * @version 0.4
  *
  */
-public class DriverHelper extends HelperBase{
+public class DriverHelper extends WebDriverHelperBase{
 	
 	private enum Browser {
 		FF, CHROME, IE

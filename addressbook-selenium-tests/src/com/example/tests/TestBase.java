@@ -22,7 +22,7 @@ import com.example.fw.ApplicationManager;
  * Basic methods for initialization and stop the application manager for the specified browser
  * DataProvider are defined for groups and contacts
  * 
- * @version 0.7
+ * @version 0.8
  *
  */
 public abstract class TestBase {
@@ -41,6 +41,7 @@ public abstract class TestBase {
 		properties.load(new FileReader(new File(configFile)));
 		app = ApplicationManager.getInstance();
 		app.setProperties(properties);
+		app.getDriverHelper();
 	  }
 	
 	@AfterTest

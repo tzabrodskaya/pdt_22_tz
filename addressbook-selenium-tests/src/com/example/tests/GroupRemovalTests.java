@@ -12,7 +12,7 @@ import com.example.utils.SortedListOf;
 /**
  * Testing random Group Deletion functionality
  * 
- * @version 0.2
+ * @version 0.3
  */
 public class GroupRemovalTests extends TestBase{
 	
@@ -21,7 +21,7 @@ public class GroupRemovalTests extends TestBase{
 	public void deleteSomeGroup() {
 	    
 	    //save old state
-	    SortedListOf<GroupData> oldList = app.getGroupHelper().getGroups();
+	    SortedListOf<GroupData> oldList = app.getHibernateHelper().listGroups();
 	    
 	    Random rnd = new Random();
 	    int index = rnd.nextInt(oldList.size() - 1);

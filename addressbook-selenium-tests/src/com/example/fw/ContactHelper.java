@@ -1,6 +1,7 @@
 package com.example.fw;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 import com.example.tests.ContactData;
@@ -10,10 +11,10 @@ import java.util.List;
 
 /**
  * Helper to manipulate the contacts
- * @version 0.4
+ * @version 0.5
  *
  */
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends WebDriverHelperBase{
 	
 	public static boolean CREATION = true;
 	public static boolean MODIFICATION = false;
@@ -44,6 +45,7 @@ public class ContactHelper extends HelperBase{
 	}
 	
 	public ContactHelper addToGroupContact(int index) {
+		manager.navigateTo().mainPage();
 		selectContactByIndex(index);
 		addToGroup("");
 		manager.navigateTo().mainPage();
@@ -77,7 +79,7 @@ public class ContactHelper extends HelperBase{
 		
 		for (WebElement row: rows) {
 			
-			//title contains First and Lastnames together with spaces, use relative xpath with id instead
+			//title contains First and LastNames together with spaces, use relative xpath with id instead
 			String id = row.findElement(By.xpath(".//td[1]/input")).getAttribute("id");
 			Integer contactId = Integer.parseInt(id.replace("id",""));
 			String lastName = row.findElement(By.xpath(".//td[2]")).getText();
@@ -92,7 +94,8 @@ public class ContactHelper extends HelperBase{
 				.withId(contactId)
 				.withHomeTel(homeTel)
 				.withMainEmail(mainEmail));
-		}
+	
+		} 
 			
 	}
 	
@@ -108,9 +111,15 @@ public class ContactHelper extends HelperBase{
 			String names = row.findElement(By.xpath("./b")).getText();
 			String firstName = (names == "" || !names.contains("First")) ? "" : getFirstName(names);
 			String lastName = (names == "" || !names.contains("Last")) ? "" : names.substring(names.indexOf("L"), names.length());
-			String mainEmail = row.findElement(By.xpath(".//a[1]")).getText();
+			String mainEmail = "";
+			try {
+				mainEmail = row.findElement(By.xpath(".//a[1]")).getText();
+			} catch (NoSuchElementException e) {
+			}
+			
 			String rowText = row.getText();
-			String homeTel = rowText.substring(rowText.indexOf("H: ") + 3, rowText.indexOf("\n", rowText.indexOf("H: ")));
+			String homeTel = rowText.contains("H:") ? rowText.substring(rowText.indexOf("H: ") + 3, rowText.indexOf("\n", rowText.indexOf("H: "))) : "";
+			
 			
 			listAddressBook.add(new ContactData()
 				.withFirstName(firstName)
@@ -175,6 +184,7 @@ public class ContactHelper extends HelperBase{
 
 	//update
 	public ContactHelper initContactModification(int index) {
+		manager.navigateTo().mainPage();
 		//contacts start always with 2
 		index += 2;
 		click(By.xpath(".//*[@id='maintable']//tr[" + index + "]/td[7]//img"));

@@ -12,7 +12,7 @@ import com.example.utils.SortedListOf;
 /**
  * Testing Contact Deletion functionality
  * 
- * @version 0.2
+ * @version 0.3
  */
 public class ContactRemovalTests extends TestBase{
 	
@@ -20,7 +20,7 @@ public class ContactRemovalTests extends TestBase{
 	public void removeSomeContact() {
 		
 		//save old state
-		SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
+		SortedListOf<ContactData> oldList = app.getHibernateHelper().listContacts();
 		
 		Random rnd = new Random();
 	    int index = rnd.nextInt(oldList.size() - 1);

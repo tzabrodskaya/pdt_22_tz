@@ -10,10 +10,10 @@ import com.example.utils.SortedListOf;
 
 /**
  * Helper to manipulate the groups
- * @version 0.3
+ * @version 0.4
  *
  */
-public class GroupHelper extends HelperBase{
+public class GroupHelper extends WebDriverHelperBase{
 	
 	public GroupHelper(ApplicationManager manager) {
 		super(manager);
@@ -42,6 +42,7 @@ public class GroupHelper extends HelperBase{
 
 	//delete
 	public GroupHelper deleteGroup(int index) {
+		manager.navigateTo().groupsPage();
 		selectGroupByIndex(index);
 		submitGroupDeletion();
 		returnToGroupsPage();
@@ -103,6 +104,7 @@ public class GroupHelper extends HelperBase{
 
 	//update
 	public GroupHelper initGroupModification(int index) {
+		manager.navigateTo().groupsPage();
 		selectGroupByIndex(index);	
 		click(By.name("edit"));
 		return this;
