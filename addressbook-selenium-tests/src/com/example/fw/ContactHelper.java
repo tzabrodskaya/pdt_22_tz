@@ -24,7 +24,7 @@ public class ContactHelper extends WebDriverHelperBase{
 		super(manager);
 	}
 
-	public ContactHelper createContact(ContactData contact) {
+	public WebDriverHelperBase createContact(ContactData contact) {
 		initContactCreation();    
     	fillContactForm(contact,CREATION);
     	submitContactCreation();
@@ -33,8 +33,12 @@ public class ContactHelper extends WebDriverHelperBase{
 		return this;
 	}
 	
+	public ContactData getContactFromEditForm(int index) {
+		initContactModification(index);
+		return readContactForm();
+	}
 
-	public ContactHelper modifyContact(int index, ContactData contact) {
+	public WebDriverHelperBase modifyContact(int index, ContactData contact) {
 		initContactModification(index);
 		fillContactForm(contact,MODIFICATION);
 		submitContactModification();
@@ -44,7 +48,7 @@ public class ContactHelper extends WebDriverHelperBase{
 		
 	}
 	
-	public ContactHelper addToGroupContact(int index) {
+	public WebDriverHelperBase addToGroupContact(int index) {
 		manager.navigateTo().mainPage();
 		selectContactByIndex(index);
 		addToGroup("");
@@ -53,7 +57,7 @@ public class ContactHelper extends WebDriverHelperBase{
 		
 	}
 	
-	public ContactHelper contactDeletion(int index) {
+	public WebDriverHelperBase contactDeletion(int index) {
 		initContactModification(index);
 		deleteContact();
 		returnToHomePage();
@@ -133,6 +137,19 @@ public class ContactHelper extends WebDriverHelperBase{
 		return listAddressBook;
 	}
 
+	//get Contact from Contact Form
+	private ContactData readContactForm() {
+		
+		String firstName = getValueByName("firstname");
+		String lastName = getValueByName("lastname");
+		String homeTel = getValueByName("home");
+		String mainEmail = getValueByName("email");
+		return new ContactData()
+				.withFirstName(firstName)
+				.withLastName(lastName)
+				.withHomeTel(homeTel)
+				.withMainEmail(mainEmail);
+	}
 	
 //----------------------------------------------------------------------------------------------------------------------------------
 
@@ -141,13 +158,13 @@ public class ContactHelper extends WebDriverHelperBase{
 	}
 	
 	//create
-	public ContactHelper initContactCreation() {
+	public WebDriverHelperBase initContactCreation() {
 		manager.navigateTo().mainPage();
 	    click(By.linkText("add new"));
 	    return this;
 	}
 
-	public ContactHelper fillContactForm(ContactData contact, boolean formType) {
+	public WebDriverHelperBase fillContactForm(ContactData contact, boolean formType) {
 	    type(By.name("firstname"), contact.getFirstName());
 	    type(By.name("lastname"), contact.getLastName());
 	    type(By.name("address"), contact.getMainAddress());
@@ -171,19 +188,19 @@ public class ContactHelper extends WebDriverHelperBase{
 	    return this;
 	}
 
-	public ContactHelper submitContactCreation() {
+	public WebDriverHelperBase submitContactCreation() {
 		click(By.name("submit"));
 		cachedContacts = null;
 	    return this;
 	}
 
-	public ContactHelper returnToHomePage() {
+	public WebDriverHelperBase returnToHomePage() {
 		click(By.linkText("home page"));
 	    return this;
 	}
 
 	//update
-	public ContactHelper initContactModification(int index) {
+	public WebDriverHelperBase initContactModification(int index) {
 		manager.navigateTo().mainPage();
 		//contacts start always with 2
 		index += 2;
@@ -191,7 +208,7 @@ public class ContactHelper extends WebDriverHelperBase{
 	    return this;
 	}
 	
-	public ContactHelper submitContactModification() {
+	public WebDriverHelperBase submitContactModification() {
 		click(By.xpath("//input[@value='Update']"));
 		cachedContacts = null;
 	    return this;
@@ -199,7 +216,7 @@ public class ContactHelper extends WebDriverHelperBase{
 	}
 
 	//delete
-	public ContactHelper deleteContact() {
+	public WebDriverHelperBase deleteContact() {
 		click(By.xpath("//input[@value='Delete']"));
 		cachedContacts = null;
 	    return this;
@@ -207,17 +224,18 @@ public class ContactHelper extends WebDriverHelperBase{
 	}
 	
 	//add to group
-	public ContactHelper selectContactByIndex(int index) {
+	public WebDriverHelperBase selectContactByIndex(int index) {
 		click(By.xpath("//input[@name='selected[]'][" + index + "]"));
 	    return this;
 		
 	}
 
-	public ContactHelper addToGroup(String group) {
+	public WebDriverHelperBase addToGroup(String group) {
 		selectByText(By.name("to_group"), group);
 		click(By.name("add"));
 	    return this;
 		
 	}
+
 
 }
