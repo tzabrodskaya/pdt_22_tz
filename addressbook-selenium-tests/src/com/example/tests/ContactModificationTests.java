@@ -12,7 +12,7 @@ import com.example.utils.SortedListOf;
 /**
  * Testing Contacts Modification functionality
  * 
- * @version 0.4
+ * @version 0.5
  */
 public class ContactModificationTests extends TestBase{
 	
@@ -25,6 +25,10 @@ public class ContactModificationTests extends TestBase{
 		Random rnd = new Random();
 		int index = rnd.nextInt(oldList.size() - 1);
 		
+		//check edit form is correctly loaded from DB
+		ContactData displayedContact = app.getContactHelper().getContactFromEditForm(index);
+		assertThat(oldList.get(index), equalTo(displayedContact));
+				
 		app.getContactHelper().modifyContact(index, contact);
 		
 		//save new state

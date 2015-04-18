@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.*;
 /**
  * Testing Contacts Creation functionality
  * 
- * @version 0.7
+ * @version 0.8
  */
 
 public class ContactCreationTests extends TestBase{
@@ -43,7 +43,8 @@ public class ContactCreationTests extends TestBase{
     // compare states
     assertThat(newList, equalTo(oldList.withAdded(contact)));
    
-    
+    //compare that display of contacts is according to DB data
+    assertThat(newList, equalTo(app.getHibernateHelper().listContacts()));
   }
 
 }

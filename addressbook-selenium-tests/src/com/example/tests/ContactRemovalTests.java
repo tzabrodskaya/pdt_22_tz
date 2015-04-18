@@ -12,7 +12,7 @@ import com.example.utils.SortedListOf;
 /**
  * Testing Contact Deletion functionality
  * 
- * @version 0.3
+ * @version 0.4
  */
 public class ContactRemovalTests extends TestBase{
 	
@@ -33,6 +33,9 @@ public class ContactRemovalTests extends TestBase{
 		
 		//compare states
 		assertThat(newList,equalTo(oldList.without(index)));
+		
+		//compare displayed on main Page to DB
+		assertThat(newList, equalTo(app.getHibernateHelper().listContacts()));
 	}
 
 }

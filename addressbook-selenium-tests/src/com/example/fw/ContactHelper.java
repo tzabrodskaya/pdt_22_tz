@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * Helper to manipulate the contacts
- * @version 0.5
+ * @version 0.6
  *
  */
 public class ContactHelper extends WebDriverHelperBase{
@@ -33,6 +33,10 @@ public class ContactHelper extends WebDriverHelperBase{
 		return this;
 	}
 	
+	public ContactData getContactFromEditForm(int index) {
+		initContactModification(index);
+		return readContactForm();
+	}
 
 	public ContactHelper modifyContact(int index, ContactData contact) {
 		initContactModification(index);
@@ -133,7 +137,19 @@ public class ContactHelper extends WebDriverHelperBase{
 		return listAddressBook;
 	}
 
-	
+	//get Contact from Contact Form
+			private ContactData readContactForm() {
+				
+				String firstName = getValueByName("firstname");
+				String lastName = getValueByName("lastname");
+				String homeTel = getValueByName("home");
+				String mainEmail = getValueByName("email");
+				return new ContactData()
+						.withFirstName(firstName)
+						.withLastName(lastName)
+						.withHomeTel(homeTel)
+						.withMainEmail(mainEmail);
+	}
 //----------------------------------------------------------------------------------------------------------------------------------
 
 	private String getFirstName(String names) {

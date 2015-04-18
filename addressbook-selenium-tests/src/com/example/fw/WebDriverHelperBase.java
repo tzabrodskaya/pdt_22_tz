@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.Select;
  *  - to link the ApplicationManager to Web-helpers
  *  - to manipulate the base elements in forms
  *  
- * @version 0.1
+ * @version 0.2
  *
  */
 public abstract class WebDriverHelperBase extends HelperBase{
@@ -54,7 +54,10 @@ public abstract class WebDriverHelperBase extends HelperBase{
 			new Select(findElement(locator)).selectByVisibleText(text);
 		}
 	}
-
+	
+	protected String getValueByName(String name) {
+		return findElement(By.name(name)).getAttribute("value");
+	}
 	//auxiliary methods
 		public boolean isElementPresent(By by) {
 		    try {
