@@ -54,10 +54,6 @@ public abstract class WebDriverHelperBase extends HelperBase{
 			new Select(findElement(locator)).selectByVisibleText(text);
 		}
 	}
-	
-	protected String getValueByName(String name) {
-		return findElement(By.name(name)).getAttribute("value");
-	}
 
 	//auxiliary methods
 		public boolean isElementPresent(By by) {
