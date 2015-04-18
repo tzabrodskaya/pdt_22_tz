@@ -42,10 +42,10 @@ public class ContactCreationTests extends TestBase{
     
     // compare states
     assertThat(newList, equalTo(oldList.withAdded(contact)));
-
+   
     //compare that display of contacts is according to DB data
     assertThat(newList, equalTo(app.getHibernateHelper().listContacts()));
-
+   
   }
 
 }
