@@ -35,6 +35,8 @@ public class GroupRemovalTests extends TestBase{
 		//compare states
 		assertThat(newList, equalTo(oldList.without(index)));
 	
+		//compare displayed on main Page to DB
+		assertThat(newList, equalTo(app.getHibernateHelper().listContacts()));
 	}
 
 }

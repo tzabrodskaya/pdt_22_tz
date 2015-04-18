@@ -33,12 +33,11 @@ public class ContactHelper extends WebDriverHelperBase{
 		return this;
 	}
 	
-
 	public ContactData getContactFromEditForm(int index) {
 				initContactModification(index);
 				return readContactForm();
 		}
-
+	
 	public ContactHelper modifyContact(int index, ContactData contact) {
 		initContactModification(index);
 		fillContactForm(contact,MODIFICATION);
