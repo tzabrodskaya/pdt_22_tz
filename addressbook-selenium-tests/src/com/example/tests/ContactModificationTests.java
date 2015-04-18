@@ -28,7 +28,7 @@ public class ContactModificationTests extends TestBase{
 		//check edit form is correctly loaded from DB
 		ContactData displayedContact = app.getContactHelper().getContactFromEditForm(index);
 		assertThat(oldList.get(index), equalTo(displayedContact));
-				
+		
 		app.getContactHelper().modifyContact(index, contact);
 		
 		//save new state
