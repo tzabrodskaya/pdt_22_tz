@@ -11,14 +11,14 @@ import java.util.List;
 
 /**
  * Helper to manipulate the contacts
- * @version 0.6
+ * 
+ * @version 0.7
  *
  */
 public class ContactHelper extends WebDriverHelperBase{
 	
 	public static boolean CREATION = true;
 	public static boolean MODIFICATION = false;
-	private SortedListOf<ContactData> cachedContacts;
 
 	public ContactHelper(ApplicationManager manager) {
 		super(manager);
@@ -29,7 +29,8 @@ public class ContactHelper extends WebDriverHelperBase{
     	fillContactForm(contact,CREATION);
     	submitContactCreation();
     	returnToHomePage();
-    	rebuildCache();
+    	// update model
+    	manager.getModel().addContact(contact);
 		return this;
 	}
 	
@@ -43,7 +44,7 @@ public class ContactHelper extends WebDriverHelperBase{
 		fillContactForm(contact,MODIFICATION);
 		submitContactModification();
 		returnToHomePage();
-		rebuildCache();
+		manager.getModel().removeContact(index).addContact(contact);
 		return this;
 		
 	}
@@ -61,21 +62,14 @@ public class ContactHelper extends WebDriverHelperBase{
 		initContactModification(index);
 		deleteContact();
 		returnToHomePage();
-		rebuildCache();
+		manager.getModel().removeContact(index);
 		return this;
 		
 	}
 	
-	//get list of contacts from main page		
-	public SortedListOf<ContactData> getContacts() {
-		if (cachedContacts == null) {
-			rebuildCache();
-		}
-		return cachedContacts;
-	}
-		
-	private void rebuildCache() {
-		cachedContacts = new SortedListOf<ContactData>();
+	//get list of contacts from main page	
+	public SortedListOf<ContactData> getUIContacts() {
+		SortedListOf<ContactData> contacts = new SortedListOf<ContactData>();
 		
 		manager.navigateTo().mainPage();
 		//find rows with contact information
@@ -92,7 +86,7 @@ public class ContactHelper extends WebDriverHelperBase{
 			String homeTel = row.findElement(By.xpath(".//td[5]")).getText();
 			
 							
-			cachedContacts.add(new ContactData()
+			contacts.add(new ContactData()
 				.withFirstName(firstName)
 				.withLastName(lastName)
 				.withId(contactId)
@@ -101,6 +95,7 @@ public class ContactHelper extends WebDriverHelperBase{
 	
 		} 
 			
+		return contacts;
 	}
 	
 	//get list of contacts from AddressBook page
@@ -189,7 +184,6 @@ public class ContactHelper extends WebDriverHelperBase{
 
 	public ContactHelper submitContactCreation() {
 		click(By.name("submit"));
-		cachedContacts = null;
 	    return this;
 	}
 
@@ -209,7 +203,6 @@ public class ContactHelper extends WebDriverHelperBase{
 	
 	public ContactHelper submitContactModification() {
 		click(By.xpath("//input[@value='Update']"));
-		cachedContacts = null;
 	    return this;
 		
 	}
@@ -217,7 +210,6 @@ public class ContactHelper extends WebDriverHelperBase{
 	//delete
 	public ContactHelper deleteContact() {
 		click(By.xpath("//input[@value='Delete']"));
-		cachedContacts = null;
 	    return this;
 		
 	}

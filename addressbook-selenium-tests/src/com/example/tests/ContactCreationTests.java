@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.*;
 /**
  * Testing Contacts Creation functionality
  * 
- * @version 0.8
+ * @version 0.9
  */
 
 public class ContactCreationTests extends TestBase{
@@ -32,19 +32,20 @@ public class ContactCreationTests extends TestBase{
   public void testNonEmptyContactCreation(ContactData contact) {
 	
 	//save old state - list of contacts
-	SortedListOf<ContactData> oldList = app.getHibernateHelper().listContacts();
+	SortedListOf<ContactData> oldList = app.getModel().getContacts();
 	
 	//actions
 	app.getContactHelper().createContact(contact);
     
     //save new state - list of contacts
-    SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
+    SortedListOf<ContactData> newList = app.getModel().getContacts();
     
-    // compare states
-    assertThat(newList, equalTo(oldList.withAdded(contact)));
-   
-    //compare that display of contacts is according to DB data
-    assertThat(newList, equalTo(app.getHibernateHelper().listContacts()));
+    // compare Model states
+    assertThat(newList, equalTo(oldList));
+    
+    //compare model to UI, DB, dbToUI if necessary
+    checkContactStates();
+    
   }
 
 }

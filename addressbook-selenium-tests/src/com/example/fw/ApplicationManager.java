@@ -5,7 +5,8 @@ import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 /**
  * Manager class for manipulation with test application
- * @version 0.3
+ * 
+ * @version 0.4
  *
  */
 public class ApplicationManager {
@@ -22,6 +23,8 @@ public class ApplicationManager {
 	private Properties props;
 	private HibernateHelper hibernateHelper;
 	
+	private ApplicationModel model;
+	
 	private ApplicationManager() {
 	}
     
@@ -32,6 +35,9 @@ public class ApplicationManager {
 	public void setProperties(Properties props) {
 		this.props = props;
 		baseUrl = getProperty("baseUrl");
+		model = new ApplicationModel();
+		model.setGroups(getHibernateHelper().listGroups());
+		model.setContacts(getHibernateHelper().listContacts());
 	}
 	
 	public String getProperty(String key) {
@@ -47,6 +53,9 @@ public class ApplicationManager {
 		driverHelper.quit();
 	}
 
+	public ApplicationModel getModel() {
+		return model;
+	}
 	
 	public NavigationHelper navigateTo() {
 		if(navigationHelper == null) {

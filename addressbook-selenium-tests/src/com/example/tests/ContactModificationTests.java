@@ -12,7 +12,7 @@ import com.example.utils.SortedListOf;
 /**
  * Testing Contacts Modification functionality
  * 
- * @version 0.5
+ * @version 0.6
  */
 public class ContactModificationTests extends TestBase{
 	
@@ -20,7 +20,7 @@ public class ContactModificationTests extends TestBase{
 	public void modifySomeContact(ContactData contact) {
 		
 		//save old state
-		SortedListOf<ContactData> oldList = app.getHibernateHelper().listContacts();
+		SortedListOf<ContactData> oldList = app.getModel().getContacts();
 		
 		Random rnd = new Random();
 		int index = rnd.nextInt(oldList.size() - 1);
@@ -32,10 +32,13 @@ public class ContactModificationTests extends TestBase{
 		app.getContactHelper().modifyContact(index, contact);
 		
 		//save new state
-		SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
+		SortedListOf<ContactData> newList = app.getModel().getContacts();
 		
-		//compare the states
-		assertThat(newList, equalTo(oldList.without(index).withAdded(contact)));
+		//compare the Model states
+		assertThat(newList, equalTo(oldList));
+		
+		//compare model to UI, DB, dbToUI if necessary
+		checkContactStates();
 		
 	}
 	

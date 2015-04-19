@@ -2,6 +2,8 @@ package com.example.tests;
 
 import static com.example.tests.ContactDataGenerator.generateRandomContacts;
 import static com.example.tests.GroupDataGenerator.generateRandomGroups;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.FileReader;
@@ -22,12 +24,14 @@ import com.example.fw.ApplicationManager;
  * Basic methods for initialization and stop the application manager for the specified browser
  * DataProvider are defined for groups and contacts
  * 
- * @version 0.8
+ * @version 0.9
  *
  */
 public abstract class TestBase {
 	
 	protected static ApplicationManager app;
+	private int checkCounter;
+	private int checkFrequency;
 
 
 	@BeforeTest
@@ -42,6 +46,9 @@ public abstract class TestBase {
 		app = ApplicationManager.getInstance();
 		app.setProperties(properties);
 		app.getDriverHelper();
+		
+		checkCounter = 0;
+		checkFrequency = Integer.parseInt(properties.getProperty("check.frequency", "0"));
 	  }
 	
 	@AfterTest
@@ -50,6 +57,15 @@ public abstract class TestBase {
 
 	  }
 	 
+	protected boolean wantToCheck() {
+		checkCounter++;
+		if (checkCounter > checkFrequency) {
+			checkCounter = 0;
+			return true;
+		}
+		return false;
+	}
+	
 	// data provider for groups
 	@DataProvider 
 	public Iterator<Object[]> randomValidGroupGenerator() {
@@ -76,6 +92,34 @@ public abstract class TestBase {
 			list.add(new Object[]{contact});
 		}
 		return list;
+	}
+
+	protected void checkGroupStates() {
+		if (wantToCheck()) {
+	    	if ("yes".equals(app.getProperty("check.db"))) {
+	    		assertThat(app.getModel().getGroups(), equalTo(app.getHibernateHelper().listGroups()));
+	    	}
+	    	if ("yes".equals(app.getProperty("check.ui"))) {
+	    		assertThat(app.getModel().getGroups(), equalTo(app.getGroupHelper().getUIGroups()));
+	    	}
+	    	if ("yes".equals(app.getProperty("check.dbToUI"))) {
+	    		assertThat(app.getHibernateHelper().listGroups(), equalTo(app.getGroupHelper().getUIGroups()));
+	    	}
+	    }
+	}
+	
+	protected void checkContactStates() {
+		if (wantToCheck()) {
+		    if ("yes".equals(app.getProperty("check.db"))) {
+		    	assertThat(app.getModel().getContacts(), equalTo(app.getHibernateHelper().listContacts()));
+		    }
+		    if ("yes".equals(app.getProperty("check.ui"))) {
+		    	assertThat(app.getModel().getContacts(), equalTo(app.getContactHelper().getUIContacts()));
+		    }
+		    if ("yes".equals(app.getProperty("check.dbToUI"))) {
+		    	assertThat(app.getHibernateHelper().listContacts(), equalTo(app.getContactHelper().getUIContacts()));
+		    }
+		}
 	}
 	
 	
