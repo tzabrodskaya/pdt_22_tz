@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Mantis test-suite">
+  <test verbose="2" name="Mantis test">
+    <classes>
+    	<class name="com.example.tests.SignUpTest">
+	 		 <methods>
+         		 <include name="shouldSignUpNewUser"/>
+         		 <include name="shouldNotSignUpExistingUser"/> 
+        	</methods>
+        </class>
+    </classes>
+  </test> <!-- Mantis test -->
+</suite> <!-- Mantis suite -->
